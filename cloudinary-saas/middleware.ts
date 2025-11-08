@@ -1,5 +1,7 @@
 import { clerkMiddleware,createRouteMatcher } from '@clerk/nextjs/server';
 
+// clerkMatcher --> It "matches" URL paths and tells your middleware which routes to make public and which to protect.
+
 const isPublicroute = createRouteMatcher([
   "/login",
   "/signup",
@@ -7,7 +9,10 @@ const isPublicroute = createRouteMatcher([
   "/home",
 ])
 
-const isPublicApiRoute
+const isPublicApiRoute = createRouteMatcher([
+  "/api/videos",
+
+])
 
 export default clerkMiddleware();
 
