@@ -17,6 +17,14 @@ export default clerkMiddleware((auth, req) => {
   if (userId && isPublicApiRoute(req) && !isAccessingHomepage) {
     return NextResponse.redirect(new URL("/home", req.url));
   }
+  // if user is not logged in and request is for protected routes
+  if (!userId) {
+    if (!isPublicroute(req) && !isPublicApiRoute(req)) {
+      return NextResponse.redirect("/signin");
+    }
+  }
+
+  
 });
 
 export const config = {
