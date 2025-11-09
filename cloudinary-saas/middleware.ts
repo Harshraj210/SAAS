@@ -7,20 +7,20 @@ const isPublicroute = createRouteMatcher(["/sign-in", "/sign-up", "/", "/home"])
 
 const isPublicApiRoute = createRouteMatcher(["/api/videos"]);
 
-export default clerkMiddleware((auth, req) => {
-  const { userId } = auth();
+export default clerkMiddleware(async(auth, req) => {
+  const { userId } = await auth();
   const currentUrl = new URL(req.url);
   const isAccessingHomepage = currentUrl.pathname === "/home";
 
   const isApirequest = currentUrl.pathname.startsWith("/api");
 
   if (userId && isPublicApiRoute(req) && !isAccessingHomepage) {
-    return NextResponse.redirect(new URL("/home", req.url));
+    return NextResponse.redirect(new URL("/sign-in", req.url));
   }
   // if user is not logged in and request is for protected routes
   if (!userId) {
     if (!isPublicroute(req) && !isPublicApiRoute(req)) {
-      return NextResponse.redirect("/signin");
+      return NextResponse.redirect("/sign-in");
     }
   }
 
