@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 // clerkMatcher --> It "matches" URL paths and tells your middleware which routes to make public and which to protect.
 
-const isPublicroute = createRouteMatcher(["/login", "/signup", "/", "/home"]);
+const isPublicroute = createRouteMatcher(["/sign-in", "/sign-up", "/", "/home"]);
 
 const isPublicApiRoute = createRouteMatcher(["/api/videos"]);
 
